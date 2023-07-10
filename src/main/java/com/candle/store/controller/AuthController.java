@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class AuthController {
+
     private UserService userService;
     private UserValidator userValidator;
 
@@ -27,21 +28,22 @@ public class AuthController {
         return "login";
     }
 
-    @PostMapping("register/save")
-    public String register(@ModelAttribute("user") UserDto userDto, BindingResult bindingResult, Model model) {
-        userValidator.validate(userDto, bindingResult);
-        if (bindingResult.hasErrors()){
+    @GetMapping("/register")
+    public String viewRegister(Model model) {
+        UserDto userDto = new UserDto();
+        model.addAttribute("user", userDto);
+        return "register";
+    }
+
+    @PostMapping("/register/save")
+    public String register(@ModelAttribute("user") UserDto userDto, BindingResult result, Model model) {
+        userValidator.validate(userDto, result);
+        if (result.hasErrors()) {
             model.addAttribute("user", userDto);
             return "register";
         }
-        userService.saveUser(userDto);
-        return "redirect:/login"; //daca avem erori trimitem inapoi la register
-    }
-    @GetMapping("/register")
-    public String viewRegister (Model model){
-        UserDto userDto = new UserDto();
-        model.addAttribute("user",userDto);
-        return "register";
 
+        userService.saveUser(userDto);
+        return "redirect:/login";
     }
 }
