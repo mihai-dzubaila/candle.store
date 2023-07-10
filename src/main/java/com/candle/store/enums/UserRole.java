@@ -7,7 +7,8 @@ public enum UserRole {
     public String friendlyName(){
         return switch (this){
             case ROLE_ADMIN -> "Admin";
-            case ROLE_USER -> "User";
+            case ROLE_USER -> "Customer";
         };
     }
+
 }

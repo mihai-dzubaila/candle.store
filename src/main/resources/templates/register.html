@@ -7,7 +7,10 @@
 </head>
 <body>
 <section id="mainBody">
-    <form method="post" th:action="@{/register/save}" th:object="${user}">
+    <form
+            method="post"
+            th:action="@{/register/save}"
+            th:object="${user}">
         <div class="form-group">
             <label for="exampleInputName">Name</label>
             <input th:field="*{fullName}" type="text" class="form-control" id="exampleInputName"
@@ -53,7 +56,9 @@
                              here</a></span>
 
         </div>
+
     </form>
+
 </section>
 </body>
 </html>

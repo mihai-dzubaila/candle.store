@@ -14,5 +14,4 @@ public class FileCover {
     private String path;
     @OneToOne(mappedBy = "fileCover")
     private Candle candle;
-
 }
